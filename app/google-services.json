@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "786344632063",
+    "firebase_url": "https://movie-db-e3b42.firebaseio.com",
+    "project_id": "movie-db-e3b42",
+    "storage_bucket": "movie-db-e3b42.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:786344632063:android:1c952a6d87d7c405a536ca",
+        "android_client_info": {
+          "package_name": "id.sisco.themoviedb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "786344632063-189ad6givgajp7tm7fl7t462eqvt0af4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALuvWk2IJ04FTICjhZx1svkrFMtGfB3hA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "786344632063-189ad6givgajp7tm7fl7t462eqvt0af4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

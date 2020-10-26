@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="id.sisco.themoviedb.utils.Helpers" />
+
+        <variable
+            name="viewModel"
+            type="id.sisco.themoviedb.module.detail.DetailViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        tools:context=".module.detail.DetailActivity">
+
+        <include
+            android:id="@+id/empty_movie"
+            layout="@layout/layout_empty_state" />
+
+        <include
+            android:id="@+id/progressBar"
+            layout="@layout/layout_progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/backdrop"
+                        android:layout_width="match_parent"
+                        android:layout_height="540dp"
+                        android:contentDescription="@string/backdrop"
+                        android:scaleType="centerCrop"
+                        android:src="@{viewModel.detailMovie.posterPath}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/favorite"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_margin="@dimen/content_margin_high"
+                        android:contentDescription="@string/favorite"
+                        android:src="@drawable/ic_baseline_favorite"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/back"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_margin="@dimen/content_margin_high"
+                        android:contentDescription="@string/favorite"
+                        android:src="@drawable/ic_arrow_back"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <ImageView
+                        android:id="@+id/play"
+                        android:layout_width="@dimen/height_64dp"
+                        android:layout_height="@dimen/height_64dp"
+                        android:alpha="0.8"
+                        android:contentDescription="@string/play"
+                        android:src="@drawable/ic_baseline_play"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.6" />
+
+                    <TextView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_marginStart="@dimen/height_64dp"
+                        android:layout_marginTop="@dimen/content_margin_high"
+                        android:layout_marginEnd="@dimen/content_margin_high"
+                        android:background="@drawable/bg_white_round"
+                        android:gravity="center"
+                        android:text="@{viewModel.detailMovie.voteAverage.toString()}"
+                        android:textColor="@color/colorBlack"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/gradient"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent">
+
+                        <TextView
+                            android:id="@+id/title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:paddingStart="@dimen/content_margin_high"
+                            android:paddingTop="@dimen/content_margin_medium"
+                            android:paddingEnd="@dimen/content_margin_high"
+                            android:singleLine="true"
+                            android:text="@{viewModel.detailMovie.title}"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="@dimen/text_size_huge"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/textView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="@dimen/content_margin_high"
+                            android:paddingTop="@dimen/content_margin_medium"
+                            android:paddingEnd="@dimen/content_margin_high"
+                            android:text="@{Helpers.detail(viewModel.detailMovie.releaseDate, viewModel.detailMovie.runtime.toString())}"
+                            android:textColor="@color/colorText"
+                            android:textSize="@dimen/text_size_medium" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_genre"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="@dimen/content_margin_large"
+                            android:paddingTop="@dimen/content_margin_medium"
+                            android:paddingEnd="@dimen/content_margin_large"
+                            android:paddingBottom="@dimen/content_margin_high"
+                            tools:itemCount="2"
+                            tools:listitem="@layout/item_genre" />
+
+                    </LinearLayout>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layout">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/content_margin_high"
+                        android:text="@string/synopsis"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/text_size_medium"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="@dimen/content_margin_high"
+                        android:paddingEnd="@dimen/content_margin_high"
+                        android:paddingBottom="@dimen/content_margin_high"
+                        android:text="@{viewModel.detailMovie.overview}"
+                        android:textSize="@dimen/text_size_small_medium" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="@dimen/content_margin_high"
+                        android:paddingStart="@dimen/content_margin_high"
+                        android:paddingEnd="@dimen/content_margin_high"
+                        android:paddingBottom="@dimen/content_margin_medium"                        android:text="@string/cast"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/text_size_medium"
+                        android:textStyle="bold" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_cast"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="@dimen/content_margin_large"
+                        android:paddingEnd="@dimen/content_margin_large"
+                        android:paddingBottom="@dimen/content_margin_high"
+                        tools:itemCount="2"
+                        tools:listitem="@layout/item_credit" />
+
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
